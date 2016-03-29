@@ -79,9 +79,9 @@ static CGFloat (^RAD)(CGFloat) = ^CGFloat (CGFloat degree){
 - (NSString *)hexString
 {
     NSArray *colorArray	= [self rgbaArray];
-    int r = [colorArray[0] floatValue] * 255;
-    int g = [colorArray[1] floatValue] * 255;
-    int b = [colorArray[2] floatValue] * 255;
+    int r = (int)([colorArray[0] floatValue] * 255);
+    int g = (int)([colorArray[1] floatValue] * 255);
+    int b = (int)([colorArray[2] floatValue] * 255);
     NSString *red = [NSString stringWithFormat:@"%02x", r];
     NSString *green = [NSString stringWithFormat:@"%02x", g];
     NSString *blue = [NSString stringWithFormat:@"%02x", b];
@@ -700,7 +700,7 @@ static CGFloat (^RAD)(CGFloat) = ^CGFloat (CGFloat degree){
     
     // CIE76 first
     if (distanceType == ColorDistanceCIE76) {
-        CGFloat distance = sqrtf(pow((L1-L2), 2) + pow((A1-A2), 2) + pow((B1-B2), 2));
+        CGFloat distance = sqrt(pow((L1-L2), 2) + pow((A1-A2), 2) + pow((B1-B2), 2));
         return distance;
     }
     
@@ -737,8 +737,8 @@ static CGFloat (^RAD)(CGFloat) = ^CGFloat (CGFloat degree){
     CGFloat deltaCPrime = cPrime1 - cPrime2;
     CGFloat hPrime1 = atan2(B1, aPrime1);
     CGFloat hPrime2 = atan2(B2, aPrime2);
-    hPrime1 = fmodf(hPrime1, RAD(360.0));
-    hPrime2 = fmodf(hPrime2, RAD(360.0));
+    hPrime1 = fmod(hPrime1, RAD(360.0));
+    hPrime2 = fmod(hPrime2, RAD(360.0));
     CGFloat deltahPrime = 0;
     if (fabs(hPrime1 - hPrime2) <= RAD(180.0)) {
         deltahPrime = hPrime2 - hPrime1;

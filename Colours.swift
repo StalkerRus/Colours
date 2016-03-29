@@ -125,7 +125,7 @@ public extension Color {
         var b: CGFloat = 0
         var a: CGFloat = 0
         
-        if self.respondsToSelector("getRed:green:blue:alpha:") {
+        if self.respondsToSelector(#selector(UIColor.getRed(_:green:blue:alpha:))) {
             self.getRed(&r, green: &g, blue: &b, alpha: &a)
         } else {
             let components = CGColorGetComponents(self.CGColor)
@@ -144,7 +144,7 @@ public extension Color {
         var b: CGFloat = 0
         var a: CGFloat = 0
         
-        if self.respondsToSelector("getHue:saturation:brightness:alpha:") {
+        if self.respondsToSelector(#selector(UIColor.getHue(_:saturation:brightness:alpha:))) {
             self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         }
         
